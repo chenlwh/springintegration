@@ -40,5 +40,12 @@ public class StartController {
 
         return result;
     }
+    
+    @RequestMapping(value = "/hello")
+    public String hello(Map<String,Object> map) {
+        map.put("hello", "success");
+
+        return "/index";
+    }
 
 }

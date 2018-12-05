@@ -4,9 +4,9 @@ $().ready(function(){
 
 
 function loadUser(){
-	$.post("rest/start/nodata",{},function(res){
-	    var data = res.data;
+	$.post("rest/start/next",{},function(res){
+//	    var data = res.data;
 	    
-	    console.log(data);
+//	    console.log(data);
 	});
 }
