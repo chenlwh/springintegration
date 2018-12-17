@@ -4,9 +4,72 @@
 <meta charset="UTF-8">
 <title>start</title>
 </head>
-<script type="text/javascript" src="/plugins/jquery-1.10.2.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/plugins/css/easyui.css">
+<script type="text/javascript" src="/plugins/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="/plugins/js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="index.js"></script>
 <body>
-Welcome!
+	<div class="easyui-panel" title="数据录入" style="width:400px;padding:30px 60px">
+		<div style="margin-bottom:20px">
+			<div>日期:</div>
+			<input id="releaseDate" class="easyui-datebox"  data-options="formatter:myformatter,parser:myparser" style="width:100%;height:32px">
+		</div>
+		<div style="margin-bottom:20px">
+			<div>回购类型:</div>
+			<select id="flag" class="easyui-combobox" style="width:100%;height:32px" panelHeight='auto' editable=false>
+				<option value="0">正回购</option>
+				<option value="1">逆回购</option>
+			</select>
+		</div>
+		<div style="margin-bottom:20px">
+			<div>金额:</div>
+			<input id="amount" class="easyui-textbox" style="width:100%;height:32px">
+		</div>
+		<div style="margin-bottom:20px">
+			<div>期限:</div>
+			<input id="expireDay" class="easyui-textbox" style="width:100%;height:32px">
+		</div>
+		
+		<div style="margin-bottom:20px">
+			<div>利率:</div>
+			<input id="rate" class="easyui-textbox" style="width:100%;height:32px">
+		</div>
+		
+		<div style="margin-bottom:20px">
+			<div>类别:</div>
+			<select id="type" class="easyui-combobox" style="width:100%;height:32px" panelHeight='auto' editable=false>
+				<option value="回购">回购</option>
+				<option value="MLF">MLF</option>
+				<option value="央行票据">央行票据</option>
+			</select>
+		</div>
+		
+		<div style="text-align:center;padding:5px 0">
+			<a id="okBtn" href="javascript:void(0)" class="easyui-linkbutton" style="width:80px">确定</a>
+		</div>
+	</div>
+
+<script type="text/javascript">
+	function myformatter(date){
+		var y = date.getFullYear();
+		var m = date.getMonth()+1;
+		var d = date.getDate();
+		return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+	}
+
+	function myparser(s){
+		if (!s) return new Date();
+		var ss = (s.split('-'));
+		var y = parseInt(ss[0],10);
+		var m = parseInt(ss[1],10);
+		var d = parseInt(ss[2],10);
+		if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+			return new Date(y,m-1,d);
+		} else {
+			return new Date();
+		}
+	}
+</script>
 </body>
 </html>

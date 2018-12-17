@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -27,15 +29,22 @@ public class ReleaseData implements Serializable{
 	@Column(name = "ID")
 	private String id;
 	
+	@Temporal(TemporalType.DATE)
 	private Date releaseDate;
 	
 	private Integer expireDay;
 	
 	private BigDecimal amount;
 	
+	@Temporal(TemporalType.DATE)
 	private Date expireDate;
 	
 	private Integer flag;
+	
+	private Double rate;
+	
+	@Column(name = "type", length=10)
+	private String type;
 
 	public String getId() {
 		return id;
@@ -83,6 +92,22 @@ public class ReleaseData implements Serializable{
 
 	public void setFlag(Integer flag) {
 		this.flag = flag;
+	}
+
+	public Double getRate() {
+		return rate;
+	}
+
+	public void setRate(Double rate) {
+		this.rate = rate;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	
