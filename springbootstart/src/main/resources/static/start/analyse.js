@@ -9,6 +9,20 @@ $().ready(function(){
 });
 
 function fetchAjaxData(){
+	$.post("/rest/releaseData/analyse", {},function(res){
+		if(res.suc=="yes"){
+			var dateList = res.dateList;
+			var amountList = res.amountList;
+			option.xAxis[0].data = dateList;
+			option.series[0].data = amountList;
+			
+			analyseChart.setOption(option);
+//			sessionNumOption.xAxis.data[i]= dateKPI;
+//			sessionNumOption.series[0].data[i] = sessionNum;
+		}else{
+			$.messager.alert('异常','异常!',"error");
+		}
+	});
 
 }
 

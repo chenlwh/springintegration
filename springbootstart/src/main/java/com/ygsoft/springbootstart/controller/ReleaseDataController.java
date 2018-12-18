@@ -2,8 +2,10 @@ package com.ygsoft.springbootstart.controller;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ygsoft.springbootstart.entity.ReleaseData;
+import com.ygsoft.springbootstart.entity.RemainData;
 import com.ygsoft.springbootstart.service.ReleaseDataService;
 import com.ygsoft.springbootstart.util.DateUtil;
 
@@ -48,6 +51,9 @@ public class ReleaseDataController {
         	data.setRate(rate);
         	data.setType(type);
         	releaseDataService.save(data);
+        	
+        	releaseDataService.saveDailySum(startDate);
+        	
             result.put("suc", "yes");
             result.put("data", "success");
         } catch (Exception e) {
@@ -59,12 +65,23 @@ public class ReleaseDataController {
         return result;
     }
     
-    @RequestMapping(value = "/start", method = RequestMethod.POST)
-    public Map<String, Object> start(@RequestParam("userId") String userId) {
+    @RequestMapping(value = "/analyse", method = RequestMethod.POST)
+    public Map<String, Object> analyse() {
         Map<String, Object> result = new HashMap<String, Object>();
         try {
+        	List<RemainData> list = releaseDataService.analyse();
+        	List<String> dateList = new ArrayList<String>();
+        	List<BigDecimal> amountList = new ArrayList<BigDecimal>();
+        	
+        	SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        	for(RemainData data : list) {
+        		dateList.add(format.format(data.getDate()));
+        		amountList.add(data.getAmount());
+        	}
+        	
             result.put("suc", "yes");
-            result.put("data", "success");
+            result.put("dateList", dateList);
+            result.put("amountList", amountList);
         } catch (Exception e) {
             result.put("suc", "no");
             result.put("msg", "error");
@@ -74,11 +91,21 @@ public class ReleaseDataController {
         return result;
     }
     
-    @RequestMapping(value = "/hello")
-    public String hello(Map<String,Object> map) {
-        map.put("hello", "success");
+    @RequestMapping(value = "/init")
+    public Map<String, Object> init(@RequestParam("date") String date) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        try {
+        	SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        	releaseDataService.init(format.parse(date));
+            result.put("suc", "yes");
+            result.put("data", "success");
+        } catch (Exception e) {
+            result.put("suc", "no");
+            result.put("msg", "error");
+            e.printStackTrace();
+        }
 
-        return "/index";
+        return result;
     }
 
 }
