@@ -16,7 +16,7 @@ public class AnalyseDataJob {
 	@Autowired
 	private ReleaseDataService releaseDataService;
 	
-    @Scheduled(cron="0 55 23 * * ?")
+    @Scheduled(cron="0 30 11,23 * * ?")
     public void execute() {
         try {
             long start = System.currentTimeMillis();

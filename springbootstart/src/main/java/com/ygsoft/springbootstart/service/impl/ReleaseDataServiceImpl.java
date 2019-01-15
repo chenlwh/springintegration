@@ -26,6 +26,11 @@ public class ReleaseDataServiceImpl implements ReleaseDataService {
 	public void save(ReleaseData data) {
 		releaseDataRepository.save(data);
 	}
+	
+	@Override
+	public List<ReleaseData> findAll() {
+		return releaseDataRepository.findAll();
+	}
 
 	@Override
 	public List<RemainData> analyse() {

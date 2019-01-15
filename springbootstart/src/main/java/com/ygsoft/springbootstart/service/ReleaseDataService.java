@@ -11,6 +11,7 @@ import com.ygsoft.springbootstart.entity.RemainData;
 @Service
 public interface ReleaseDataService {
 	void save(ReleaseData data);
+	List<ReleaseData> findAll();
 
 	List<RemainData> analyse();
 	
