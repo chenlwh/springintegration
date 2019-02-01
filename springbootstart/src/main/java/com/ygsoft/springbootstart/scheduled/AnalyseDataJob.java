@@ -28,5 +28,22 @@ public class AnalyseDataJob {
             logger.error("Error", e);
         }
     }
+    
+    @Scheduled(cron="0 0 10 * * ?")
+    public void executePY() {
+        try {
+            long start = System.currentTimeMillis();
+            System.setProperty("python.console.encoding", "utf-8");
+            String[] args1=new String[]{"python","E:\\test.py"};
+            Process pr=Runtime.getRuntime().exec(args1);            
+            pr.waitFor();
+
+            long end = System.currentTimeMillis();
+            logger.info("运行耗时：" + (end - start) + "ms");
+        } catch (Exception e) {
+        	e.printStackTrace();
+            logger.error("Error", e);
+        }
+    }
 
 }

@@ -10,6 +10,8 @@ spring:
     url: jdbc:postgresql://10.51.103.46:5432/dams_dev?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
     username: dams_dev
     password: dams_dev
+  application:
+    name: springbootstart    
     
   jpa:
     properties:
@@ -24,4 +26,11 @@ spring:
     
 server:
   port: 8088
+  
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://10.122.4.73:3333/eureka
+#    registerWithEureka: false
+#    fetchRegistry:  false
     
