@@ -14,7 +14,9 @@ function fetchAjaxData(){
 			var dateList = res.dateList;
 			var amountList = res.amountList;
 			option.xAxis[0].data = dateList;
-			option.series[0].data = amountList;
+			option.series[0].data = res.dataList;
+			option.series[1].data = res.expiredList;
+			option.series[2].data = amountList;
 			
 			analyseChart.setOption(option);
 //			sessionNumOption.xAxis.data[i]= dateKPI;

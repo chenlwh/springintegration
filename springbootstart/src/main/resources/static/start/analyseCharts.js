@@ -14,7 +14,7 @@ var option = {
     },
     calculable : true,
     legend: {
-        data:['蒸发量','降水量','货币总量']
+        data:['发布量','到期量','货币总量']
     },
     xAxis : [
         {
@@ -29,31 +29,31 @@ var option = {
             axisLabel : {
                 formatter: '{value} 亿元'
             }
-//        },
-//        {
-//            type : 'value',
-//            name : '温度',
-//            axisLabel : {
-//                formatter: '{value} °C'
-//            }
+        },
+        {
+            type : 'value',
+            name : '总金额',
+            axisLabel : {
+                formatter: '{value} 亿元'
+            }
         }
     ],
     series : [
 
-//        {
-//            name:'蒸发量',
-//            type:'bar',
-//            data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
-//        },
-//        {
-//            name:'降水量',
-//            type:'bar',
-//            data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
-//        },
+        {
+            name:'发布量',
+            type:'bar',
+            data:[]
+        },
+        {
+            name:'到期量',
+            type:'bar',
+            data:[]
+        },
         {
             name:'货币总量',
             type:'line',
-//            yAxisIndex: 1,
+            yAxisIndex: 1,
             data:[]
         }
     ]

@@ -79,9 +79,63 @@ public class ReleaseDataController {
         		amountList.add(data.getAmount());
         	}
         	
+        	List<BigDecimal> dataList = new ArrayList<BigDecimal>();
+        	List<Map<String,Object>> releaseList = releaseDataService.findAll();
+        	int releaseIndex = -1;
+        	for(int i=0;i<dateList.size();i++) {
+        		String date = dateList.get(i);
+        		if(releaseIndex<0) {
+        			for(int j=0; j<releaseList.size(); j++) {
+        				Map<String,Object> release = releaseList.get(j);
+        				String rDate = format.format(release.get("releaseDate"));
+        				if(rDate.compareTo(date)>=0) {
+                			releaseIndex = j;
+                			break;
+                		}
+        			}
+        		}
+        		
+        		Map<String,Object> data = releaseList.get(releaseIndex);
+        		String releaseDate = format.format(data.get("releaseDate"));
+        		if(date.equals(releaseDate)) {
+        			dataList.add(new BigDecimal(data.get("amount").toString()));
+        			releaseIndex++;
+        		}else {
+        			dataList.add(BigDecimal.ZERO);
+        		}
+        	}
+        	
+        	List<BigDecimal> expiredList = new ArrayList<BigDecimal>();
+        	List<Map<String,Object>> rList = releaseDataService.findAllByOrderByExpireDateAsc();
+        	int expiredIndex = -1;
+        	for(int i=0;i<dateList.size();i++) {
+        		String date = dateList.get(i);
+        		if(expiredIndex<0) {
+        			for(int j=0; j<rList.size(); j++) {
+        				Map<String,Object> release = rList.get(j);
+        				String rDate = format.format(release.get("expireDate"));
+        				if(rDate.compareTo(date)>=0) {
+        					expiredIndex = j;
+                			break;
+                		}
+        			}
+        		}
+        		
+        		Map<String,Object> data = rList.get(expiredIndex);
+        		String expiredDate = format.format(data.get("expireDate"));
+        		if(date.equals(expiredDate)) {
+        			expiredList.add(new BigDecimal(data.get("amount").toString()));
+        			expiredIndex++;
+        		}else {
+        			expiredList.add(BigDecimal.ZERO);
+        		}
+        	}
+        	
             result.put("suc", "yes");
             result.put("dateList", dateList);
             result.put("amountList", amountList);
+            result.put("dataList", dataList);
+            result.put("expiredList", expiredList);
         } catch (Exception e) {
             result.put("suc", "no");
             result.put("msg", "error");

@@ -3,6 +3,7 @@ package com.ygsoft.springbootstart.service.impl;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,9 +29,15 @@ public class ReleaseDataServiceImpl implements ReleaseDataService {
 	}
 	
 	@Override
-	public List<ReleaseData> findAll() {
-		return releaseDataRepository.findAll();
+	public List<Map<String,Object>> findAll() {
+		return releaseDataRepository.findDailyByReleaseDateAsc();
 	}
+	
+	@Override
+	public List<Map<String,Object>> findAllByOrderByExpireDateAsc() {
+		return releaseDataRepository.findDailyByExpireDateAsc();
+	}
+	
 
 	@Override
 	public List<RemainData> analyse() {

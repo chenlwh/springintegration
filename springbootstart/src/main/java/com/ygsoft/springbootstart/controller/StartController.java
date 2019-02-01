@@ -2,7 +2,6 @@ package com.ygsoft.springbootstart.controller;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,26 +35,6 @@ public class StartController {
         return result;
     }
     
-    @RequestMapping(value = "/start", method = RequestMethod.POST)
-    public Map<String, Object> start() {
-        Map<String, Object> result = new HashMap<String, Object>();
-        try {
-        	List<ReleaseData> list = releaseDataService.findAll();
-        	for(ReleaseData data : list) {
-        		if(data.getRate()==null) {
-        			System.out.println(data);
-        		}
-        	}
-            result.put("suc", "yes");
-            result.put("data", "success");
-        } catch (Exception e) {
-            result.put("suc", "no");
-            result.put("msg", "error");
-            e.printStackTrace();
-        }
-
-        return result;
-    }
     
     @RequestMapping(value = "/hello")
     public String hello(Map<String,Object> map) {
