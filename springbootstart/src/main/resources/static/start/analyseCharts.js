@@ -60,3 +60,42 @@ var option = {
 };
                     
 var analyseChart = echarts.init($("#analyseChart")[0]);
+
+
+var yearlyOption = {
+	    tooltip : {
+	        trigger: 'axis'
+	    },
+	    toolbox: {
+	        show : true,
+	        feature : {
+	            mark : {show: true},
+	            dataView : {show: true, readOnly: false},
+	            magicType: {show: true, type: ['line', 'bar']},
+	            restore : {show: true},
+	            saveAsImage : {show: true}
+	        }
+	    },
+	    calculable : true,
+	    legend: {
+	        data:[]
+	    },
+	    xAxis : [
+	        {
+	            type : 'category',
+	            data : []
+	        }
+	    ],
+	    yAxis : [
+	        {
+	            type : 'value',
+	            name : '金额',
+	            axisLabel : {
+	                formatter: '{value} 亿元'
+	            }
+	        }
+	    ],
+	    series : []
+	};
+	                    
+	var yearlyChart = echarts.init($("#yearlyChart")[0]);

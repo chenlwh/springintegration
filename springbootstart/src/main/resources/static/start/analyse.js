@@ -3,9 +3,6 @@
  */
 $().ready(function(){
 	fetchAjaxData();
-//	setTimeout(function(){
-//		$("#loader").css("display","none");
-//	},3000);
 });
 
 function fetchAjaxData(){
@@ -19,8 +16,27 @@ function fetchAjaxData(){
 			option.series[2].data = amountList;
 			
 			analyseChart.setOption(option);
-//			sessionNumOption.xAxis.data[i]= dateKPI;
-//			sessionNumOption.series[0].data[i] = sessionNum;
+
+		}else{
+			$.messager.alert('异常','异常!',"error");
+		}
+	});
+	
+	$.post("/rest/releaseData/yearlyAnalyse", {},function(res){
+		if(res.suc=="yes"){
+//			var dateList = res.dateList;
+//			var amountList = res.amountList;
+//			option.xAxis[0].data = dateList;
+//			option.series[0].data = res.dataList;
+//			option.series[1].data = res.expiredList;
+//			option.series[2].data = amountList;
+			
+			yearlyOption.xAxis[0].data = res.dateList;
+			yearlyOption.legend.data = res.yearList;
+			yearlyOption.series = res.list;
+			
+			yearlyChart.setOption(yearlyOption);
+
 		}else{
 			$.messager.alert('异常','异常!',"error");
 		}
