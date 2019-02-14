@@ -21,4 +21,10 @@ public interface ReleaseDataService {
 	void saveDailySum(Date dailyDate);
 	
 	void init(Date date);
+	
+	List<Map<String,Object>> findMonth();
+	
+	List<Map<String,Object>> findMonthByOrderByExpireDateAsc();
+
+	List<RemainData> analyseMonth();
 }

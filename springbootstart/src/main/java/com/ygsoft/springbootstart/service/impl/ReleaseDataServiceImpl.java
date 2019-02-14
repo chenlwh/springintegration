@@ -29,6 +29,23 @@ public class ReleaseDataServiceImpl implements ReleaseDataService {
 	}
 	
 	@Override
+	public List<Map<String,Object>> findMonth() {
+		return releaseDataRepository.findMonthSumByReleaseDateAsc();
+	}
+	
+	@Override
+	public List<Map<String,Object>> findMonthByOrderByExpireDateAsc() {
+		return releaseDataRepository.findMonthSumByExpireDateAsc();
+	}
+	
+
+	@Override
+	public List<RemainData> analyseMonth() {
+		return remainDataRepository.findMonthByOrderByDateAsc();
+	}
+	
+	
+	@Override
 	public List<Map<String,Object>> findAll() {
 		return releaseDataRepository.findDailyByReleaseDateAsc();
 	}
