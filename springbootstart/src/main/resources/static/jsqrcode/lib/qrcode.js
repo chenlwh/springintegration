@@ -59,7 +59,7 @@
                 qrcode.decode(oFREvent.target.result);
                 qrcode.callback = function(data) {
                     //得到扫码的结果
-                    $('.result-qrcode').append(data + '<br/>');
+                    $('.result-qrcode').append(data + '11<br/>');
                 };
             };
 
