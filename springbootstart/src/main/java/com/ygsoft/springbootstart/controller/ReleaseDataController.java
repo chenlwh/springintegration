@@ -130,7 +130,9 @@ public class ReleaseDataController {
         		String expiredDate = format.format(data.get("expireDate"));
         		if(date.equals(expiredDate)) {
         			expiredList.add(new BigDecimal(data.get("amount").toString()));
-        			expiredIndex++;
+        			if(expiredIndex<rList.size()-1) {
+        				expiredIndex++;
+        			}
         		}else {
         			expiredList.add(BigDecimal.ZERO);
         		}
