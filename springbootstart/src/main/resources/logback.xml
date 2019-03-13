@@ -5,6 +5,7 @@
 	<property name="Log_Pattern" value="[%date{ISO8601}][%thread][%20.20t][%-5p][%30.30c]-%m%n" />
 	-->
 	<property name="Log_Pattern" value="[%date{ISO8601}][%thread][%-5p][%30.30c]-%m%n" />      
+    <property name="yg.log.path" value="logbackFiles" />  
 	<property name="File_Pattern" value="/logs/%d{yyyyMMdd}/" />  
 	<contextName>${APP_Name}</contextName>
 
