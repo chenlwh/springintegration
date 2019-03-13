@@ -43,11 +43,13 @@ var option = {
         {
             name:'发布量',
             type:'bar',
+            stack: '当期',
             data:[]
         },
         {
             name:'到期量',
             type:'bar',
+            stack: '当期',
             data:[]
         },
         {

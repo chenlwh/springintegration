@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60000" debug="false">
+	<property name="APP_Name" value="expressway" /> 
+	<!-- 
+	<property name="Log_Pattern" value="[%date{ISO8601}][%thread][%20.20t][%-5p][%30.30c]-%m%n" />
+	-->
+	<property name="Log_Pattern" value="[%date{ISO8601}][%thread][%-5p][%30.30c]-%m%n" />      
+	<property name="File_Pattern" value="/logs/%d{yyyyMMdd}/" />  
+	<contextName>${APP_Name}</contextName>
+
+	<!-- &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">  
+		<encoder>  
+			<pattern>${Log_Pattern}</pattern> 
+		</encoder>  
+	</appender>
+
+	<appender name="root" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">    
+			<fileNamePattern>${yg.log.path}${File_Pattern}mat.log</fileNamePattern>    
+		</rollingPolicy> 
+	    <append>true</append>  
+	    <Prudent>true</Prudent>
+	    <encoder><pattern>${Log_Pattern}</pattern></encoder>  
+	</appender>
+	
+	<!-- addtivity，默认为true，将此loger的打印信息向上级传递；-->
+    <!-- 没有设置appender，此loger本身不打印任何信息 -->
+   <!-- ############################################################################################### -->
+	<!-- MyBatis3 的包路径 SQL信息被这个logger打印-->
+	<!-- cn.com.techhero插件的包路径 自动化加载信息的logger -->
+	<logger name="com.ygsoft"  level="DEBUG" additivity="true">
+	</logger>
+	
+	<!-- JSON -->
+	<logger name="net.sf.json" level="ERROR" additivity="false">
+	</logger>
+	
+	<logger name="com.alibaba.druid" level="WARN" additivity="true">
+	</logger>
+	
+	<logger name="org.hibernate" level="INFO" additivity="true">
+	</logger>
+	
+	<logger name="org.springframework.data.elasticsearch" level="DEBUG" additivity="true">
+	</logger>
+	
+	<logger name="org.springframework.security" level="WARN" additivity="true">
+	</logger>
+
+	<!-- ############################################################################################### -->
+	<!-- TRACE, DEBUG, INFO, WARN, ERROR -->
+	<root level="INFO">              
+		<appender-ref ref="STDOUT" />   
+		<appender-ref ref="root" />
+	</root>	
+   
+</configuration>
