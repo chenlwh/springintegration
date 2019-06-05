@@ -80,6 +80,14 @@ public class ReleaseDataController {
         		amountList.add(data.getAmount());
         	}
         	
+        	Calendar cal = Calendar.getInstance();
+        	cal.setTime(new Date());
+        	for(int i=0; i<30; i++) {
+        		cal.add(Calendar.DAY_OF_MONTH, 1);
+            	Date date = cal.getTime();
+            	dateList.add(format.format(date));
+        	}
+        	
         	List<BigDecimal> dataList = new ArrayList<BigDecimal>();
         	List<Map<String,Object>> releaseList = releaseDataService.findMonth();
         	int releaseSize = releaseList.size();
@@ -129,7 +137,7 @@ public class ReleaseDataController {
         		Map<String,Object> data = rList.get(expiredIndex);
         		String expiredDate = format.format(data.get("expireDate"));
         		if(date.equals(expiredDate)) {
-        			expiredList.add(new BigDecimal(data.get("amount").toString()));
+        			expiredList.add(new BigDecimal(data.get("amount").toString()).negate());
         			if(expiredIndex<rList.size()-1) {
         				expiredIndex++;
         			}
