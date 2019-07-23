@@ -81,7 +81,8 @@ public class ReleaseDataController {
         	}
         	
         	Calendar cal = Calendar.getInstance();
-        	cal.setTime(new Date());
+        	String lastDate = dateList.get(dateList.size()-1);
+        	cal.setTime(format.parse(lastDate));
         	for(int i=0; i<30; i++) {
         		cal.add(Calendar.DAY_OF_MONTH, 1);
             	Date date = cal.getTime();

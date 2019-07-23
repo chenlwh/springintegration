@@ -25,7 +25,7 @@ spring:
     show-sql: true
     
 server:
-  port: 8078
+  port: 8068
   
 logging.config: classpath:logback.xml
 #eureka:
